@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Live Translate</title>
+    <link rel="stylesheet" href="default.css" />
+
+    <style>
+    .dg {
+        /* visibility: hidden;
+        display: none; */
+    }
+
+    .emotionText {
+
+    }
+    </style>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="login">
+        <form class="loginForm hidden">
+            <div class="loginLogo"> </div>
+            <input class="usernameInput" placeholder="Name" autofocus></input>
+            <span> 
+                <select class="langSelect">
+                    <option value="en-US">English</option>
+                    <option value="fr-FR">French</option>
+                    <option value="it-IT">Italian</option>  
+                    <option value="ja-JP">Japanese</option>                                        
+                    <option value="zh-CN">Chinese (Simplified)</option>
+                    <option value="zh-TW">Chinese (Taiwanese)</option>
+                    
+                </select>
+                <button class="connectButton" type="submit">Connect</button>
+            </span>
+        </form>
+    </div>
+
+    <div class="view">
+
+    <div>
+
+        <canvas id="output" style="position: absolute; z-index: -1;"></canvas>
+        <video class="localVideo hidden" autoplay style="position: absolute;"></video>
+
+        <div style="display: flex; justify-content:center;">
+            <button class="callButton" disabled></button>
+            <h5 class="partnerInfo"></h5>
+        </div>
+
+        <video id="video" class="remoteVideo hidden" autoplay style="display: none;" ></video>
+        
+        <button class="callButton" disabled></button>
+        <h5 class="partnerInfo"></h5>
+
+        <h1 class="waiting hidden">Waiting...</h1>
+
+        <div style="position: relative">
+            <p id="emotionText" class="emotionText fa fa-smile-o"></p>
+        </div>  
+
+        <div class="status">
+            <div class="client info"></div>
+            <div class="client status"></div>
+            <div class="peer info"></div>
+            <div class="peer status"></div>
+        </div>
+
+    </div>
+
+        <div class="transcriptContainer hidden">
+            <div class="transcript">
+                <span class="measure">LOADING<br/>...</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hidden canvas to grab screenshots for emotion detection -->
+    <canvas class="screenshotCanvas">
+    </canvas>
+
+    <audio class="audioPlayer" autoplay></audio>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="lib/webrtc-adapter.js"></script>
+        <!-- The SDK has a dependency on requirejs (http://requirejs.org/). -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
+        <script>
+            // Special handling to let the sample work when loaded directly from file system.
+            if (window.location.protocol == "file:") {
+                document.write('\<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js">\<\/script>');
+            }
+        </script>
+    
+    <script src="lib/xml-parse.js"></script>
+    <script src="lib/speech.browser.sdk.js"></script>
+    <script src="recognizer.js"></script>
+    <script src="translation.js"></script>
+    <script src="emotion.js"></script>
+    <script src="motiontracker.js"></script>
+    <script src="default.js"></script>
+</body>
+
+</html>
